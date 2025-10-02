@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GETS Readiness Analyzer</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>GETS Readiness & Gap Analyzer</h1>
+    <div id="wizard">
+      <div class="steps">
+        <div class="step" id="step1">1) Context</div>
+        <div class="step" id="step2">2) Upload/Paste</div>
+        <div class="step" id="step3">3) Results</div>
+      </div>
+
+      <div class="panel" id="panel1">
+        <label>Country
+          <input id="country" placeholder="UAE" />
+        </label>
+        <label>ERP
+          <input id="erp" placeholder="SAP" />
+        </label>
+        <div class="q">
+          <label><input type="checkbox" id="q_webhooks" checked /> Webhooks</label>
+          <label><input type="checkbox" id="q_sandbox" checked /> Sandbox Env</label>
+          <label><input type="checkbox" id="q_retries" /> Retries</label>
+        </div>
+        <button id="toUpload">Next →</button>
+      </div>
+
+      <div class="panel hidden" id="panel2">
+        <div class="upload">
+          <input type="file" id="fileInput" accept=".csv,.json" />
+          <textarea id="textInput" placeholder="Paste CSV or JSON here"></textarea>
+        </div>
+        <div class="actions">
+          <button id="uploadBtn">Upload</button>
+          <button id="back1">← Back</button>
+        </div>
+        <div id="preview" class="preview">
+          <div id="previewStatus">No data yet.</div>
+          <table id="previewTable" class="hidden"></table>
+        </div>
+      </div>
+
+      <div class="panel hidden" id="panel3">
+        <div class="scores">
+          <div class="score"><span>Data</span><div class="bar"><div id="barData"></div></div><span id="valData">0</span></div>
+          <div class="score"><span>Coverage</span><div class="bar"><div id="barCoverage"></div></div><span id="valCoverage">0</span></div>
+          <div class="score"><span>Rules</span><div class="bar"><div id="barRules"></div></div><span id="valRules">0</span></div>
+          <div class="score"><span>Posture</span><div class="bar"><div id="barPosture"></div></div><span id="valPosture">0</span></div>
+          <div class="score overall"><span>Overall</span><div class="bar"><div id="barOverall"></div></div><span id="valOverall">0</span></div>
+        </div>
+        <div class="coverage">
+          <h3>Coverage</h3>
+          <div><strong>Matched</strong>: <span id="matched"></span></div>
+          <div><strong>Close</strong>: <ul id="close"></ul></div>
+          <div><strong>Missing</strong>: <span id="missing"></span></div>
+        </div>
+        <div class="rules">
+          <h3>Rule Findings</h3>
+          <ul id="ruleFindings"></ul>
+        </div>
+        <div class="result-actions">
+          <button id="downloadJson">Download Report JSON</button>
+          <button id="copyLink">Copy Shareable Link</button>
+          <a id="shareLink" target="_blank" class="hidden">Open Report</a>
+        </div>
+        <div class="nav">
+          <button id="back2">← Back</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/main.js"></script>
+</body>
+</html>

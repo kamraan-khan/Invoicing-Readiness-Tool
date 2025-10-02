@@ -1,0 +1,3 @@
+invoice.id,invoice.issue_date,invoice.currency,invoice.total_excl_vat,invoice.vat_amount,invoice.total_incl_vat,seller.name,seller.trn,buyer.name,buyer.trn,lines[].sku,lines[].description,lines[].qty,lines[].unit_price,lines[].line_total
+INV-2001,2025-13-12,EURO,100,5,105,Acme Seller,S-TRN-1,Beta Buyer,B-TRN-2,A1,Item A,2,10,21
+INV-2001,2025-13-12,EURO,100,5,105,Acme Seller,S-TRN-1,Beta Buyer,B-TRN-2,B2,Item B,4,20,80

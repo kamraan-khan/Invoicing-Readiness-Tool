@@ -1,0 +1,18 @@
+[
+  {
+    "invoice": {
+      "id": "INV-1001",
+      "issue_date": "2025-01-31",
+      "currency": "AED",
+      "total_excl_vat": 100,
+      "vat_amount": 5,
+      "total_incl_vat": 105
+    },
+    "seller": { "name": "Acme Seller", "trn": "S-TRN-1", "country": "AE", "city": "DXB" },
+    "buyer": { "name": "Beta Buyer", "trn": "B-TRN-2", "country": "AE", "city": "DXB" },
+    "lines": [
+      { "sku": "A1", "description": "Item A", "qty": 2, "unit_price": 10, "line_total": 20 },
+      { "sku": "B2", "description": "Item B", "qty": 4, "unit_price": 20, "line_total": 80 }
+    ]
+  }
+]

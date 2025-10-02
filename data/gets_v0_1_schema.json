@@ -1,0 +1,31 @@
+{
+  "invoice": {
+    "id": "",
+    "issue_date": "YYYY-MM-DD",
+    "currency": "AED|SAR|MYR|USD",
+    "total_excl_vat": 0,
+    "vat_amount": 0,
+    "total_incl_vat": 0
+  },
+  "seller": {
+    "name": "",
+    "trn": "",
+    "country": "ISO-2",
+    "city": ""
+  },
+  "buyer": {
+    "name": "",
+    "trn": "",
+    "country": "ISO-2",
+    "city": ""
+  },
+  "lines": [
+    {
+      "sku": "",
+      "description": "",
+      "qty": 0,
+      "unit_price": 0,
+      "line_total": 0
+    }
+  ]
+}
