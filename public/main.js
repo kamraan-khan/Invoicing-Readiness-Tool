@@ -1,5 +1,6 @@
 let uploadId = null;
 let report = null;
+const API_BASE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1') ? '' : '/api';
 
 const stepEls = [
   document.getElementById('step1'),
@@ -95,9 +96,9 @@ async function doUpload() {
     fd.append('file', file);
     fd.append('country', country);
     fd.append('erp', erp);
-    res = await fetch('/upload', { method: 'POST', body: fd });
+    res = await fetch(`${API_BASE}/upload`, { method: 'POST', body: fd });
   } else if (text) {
-    res = await fetch('/upload', { method: 'POST', headers: { 'Content-Type':'application/json' }, body: JSON.stringify({ text, country, erp }) });
+    res = await fetch(`${API_BASE}/upload`, { method: 'POST', headers: { 'Content-Type':'application/json' }, body: JSON.stringify({ text, country, erp }) });
   } else {
     alert('Provide a file or pasted text.');
     return;
@@ -115,7 +116,7 @@ async function analyze() {
     sandbox_env: document.getElementById('q_sandbox').checked,
     retries: document.getElementById('q_retries').checked,
   };
-  const res = await fetch('/analyze', { method: 'POST', headers: { 'Content-Type':'application/json' }, body: JSON.stringify({ uploadId, questionnaire }) });
+  const res = await fetch(`${API_BASE}/analyze`, { method: 'POST', headers: { 'Content-Type':'application/json' }, body: JSON.stringify({ uploadId, questionnaire }) });
   if (!res.ok) { alert('Analyze failed'); return; }
   report = await res.json();
   renderResults(report);
@@ -146,7 +147,7 @@ function renderResults(r){
     rf.appendChild(li);
   });
 
-  const link = `${location.origin}/report/${r.reportId}`;
+  const link = `${location.origin}${API_BASE}/report/${r.reportId}`;
   const a = document.getElementById('shareLink');
   a.href = link; a.classList.remove('hidden'); a.textContent = 'Open Report JSON';
 
