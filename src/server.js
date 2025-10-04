@@ -1,19 +1,13 @@
 import path from 'path';
-import { app as appCore } from './app.js';
 import express from 'express';
+import { app as appCore } from './app.js';
 
 // Serve static UI locally
 appCore.use(express.static('public'));
 
-// ✅ Add a simple health-check API endpoint
-appCore.get('/api/health', (req, res) => {
-  res.json({
-    status: 'ok',
-    message: 'Server is running fine!',
-  });
-});
+// ✅ Use Render's dynamic port
+const PORT = process.env.PORT || 10000;
 
-const PORT = process.env.PORT || 3000;
-appCore.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}`);
+appCore.listen(PORT, '0.0.0.0', () => {
+  console.log(`✅ Server listening on port ${PORT}`);
 });
