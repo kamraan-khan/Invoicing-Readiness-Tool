@@ -1,6 +1,12 @@
 let uploadId = null;
 let report = null;
-const API_BASE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1') ? '' : '/api';
+const host = location.hostname;
+const API_BASE = (() => {
+  if (host === 'localhost' || host === '127.0.0.1') return '';
+  if (host.endsWith('.vercel.app') || host.endsWith('.netlify.app')) return '/api';
+  if (host.endsWith('onrender.com')) return '';
+  return '/api';
+})();
 
 const stepEls = [
   document.getElementById('step1'),
@@ -104,7 +110,11 @@ async function doUpload() {
     return;
   }
 
-  if (!res.ok) { alert('Upload failed'); return; }
+  if (!res.ok) {
+    let msg = 'Upload failed';
+    try { const err = await res.json(); msg += `: ${err.error||res.status}`; } catch {}
+    alert(msg); return;
+  }
   const data = await res.json();
   uploadId = data.uploadId;
   document.getElementById('previewStatus').textContent = 'Uploaded. Ready to analyze.';
@@ -117,7 +127,11 @@ async function analyze() {
     retries: document.getElementById('q_retries').checked,
   };
   const res = await fetch(`${API_BASE}/analyze`, { method: 'POST', headers: { 'Content-Type':'application/json' }, body: JSON.stringify({ uploadId, questionnaire }) });
-  if (!res.ok) { alert('Analyze failed'); return; }
+  if (!res.ok) {
+    let msg = 'Analyze failed';
+    try { const err = await res.json(); msg += `: ${err.error||res.status}`; } catch {}
+    alert(msg); return;
+  }
   report = await res.json();
   renderResults(report);
 }
